@@ -27,6 +27,7 @@
       } 
     }
     .lov-anchor_link{
+      position: static;
       z-index: 1;
       padding-left: 0px;
      .anchor-link_content{
@@ -43,7 +44,7 @@
     .lov-anchor_ink{
       height: 100%;
       width: 100%;
-      z-index: -1;
+      z-index: 1;
       &::before{
         display: none
       }
@@ -55,7 +56,7 @@
       } 
     }
     .lov-anchor_link{
-      z-index: 1;
+      z-index: 2;
       .anchor-link_content{
         padding-left:15px;  
         padding-right:15px;  

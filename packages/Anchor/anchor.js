@@ -52,7 +52,6 @@ function scrollTo(start, to, targer, duration, callback) {
     }
     animateScroll()
 }
-var checkChange = []
 export default {
     name: 'LovAnchor',
     props: {
@@ -95,19 +94,15 @@ export default {
             links: [],
             activeSection: {},
             activeLink: false,
-            activeLinkId: ''
+            activeLinkId: '',
+            checkChange:[]
         }
     },
     mounted() {
         this.$nextTick(() => {
             this.targetid ? this.container = document.getElementById(this.targetid) : this.container = window
-            if (this.container == window) {
-                window.addEventListener('scroll', this.containerScroll)
-            } else if (this.container) {
-                this.container ? this.container.addEventListener('scroll', this.containerScroll) : null
-            }
-           
-            console.log(this.$attrs, this.containerScroll)
+            this.container ? this.container.addEventListener('scroll', this.containerScroll) : null
+            this.containerScroll()
         })
     },
     beforeDestroy() {
@@ -129,10 +124,10 @@ export default {
         containerScroll() {
             if (this.isclick) return
             let activeLink = this.getCurrentAnchor()
-            if (activeLink == checkChange[0]) return
-            checkChange.unshift(activeLink)
-            if (checkChange.length > 1)
-                checkChange.splice(1, 1)
+            if (activeLink == this.checkChange[0]) return
+            this.checkChange.unshift(activeLink)
+            if (this.checkChange.length > 1)
+                this.checkChange.splice(1, 1)
             if (activeLink) {
                 this.setCurrentLink(activeLink)
                 this.setCurrentDot(activeLink)
